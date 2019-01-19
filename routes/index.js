@@ -5,6 +5,7 @@ res: 요청한 클라이언트로 응답을 위한 객체
 next: 다음 로직 수행을 위한 함수명
 */
 var express = require('express');
+var session = require('express-session')
 var router = express.Router();
 
 /* GET home page. */
@@ -17,7 +18,12 @@ router.get('/', function(req, res, next) {
 // });
 
 router.post('/login', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  console.log('login')
+  let sess = req.session
+  sess.userid = req.body['u-no']
+  sess.userpw = req.body['u-pw']
+  res.redirect('calendar')
+  // res.render('calendar', { title: 'Express' });
 });
 /* DB API */
 const companyController = require('../controllers').company;
