@@ -6,3 +6,29 @@ body {
 a {
   color: #00B7FF;
 }
+
+.jumbotron{
+  padding-top: initial
+}
+
+.form-box {
+  width: 500px;
+  height: 480px;
+  background: #00B7FF;
+  margin: 0 auto; 
+  border-radius: 25px;
+  position: relative;
+}
+
+.form-title {
+  position: relative;
+  width: 100%;
+  padding: 50px 0;
+  text-align: center;
+}
+.btn-two{
+  text-align: center;
+}
+.btn-two button:nth-child(1){
+  margin-right: 20px;
+}
