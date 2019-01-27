@@ -8,7 +8,8 @@ var session = require('express-session')
 var indexRouter = require('./routes/index'),
     usersRouter = require('./routes/users'),
     calendarRouter = require('./routes/calendar'),
-    boardRouter = require('./routes/board');
+    boardRouter = require('./routes/board'),
+    sampleRouter = require('./routes/sample');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use(session({
 }))
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/js', express.static(path.join(__dirname, 'node_modules', 'axios', 'dist')));
 app.use('/js', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'js')));
 app.use('/css', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css')));
 
@@ -35,6 +37,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/calendar', calendarRouter);
 app.use('/board', boardRouter);
+app.use('/sample', sampleRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
