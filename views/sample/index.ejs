@@ -57,6 +57,7 @@
       u.childAllRemove('#output');
       for(let i = 0, len = response.data.length; i<len; i++){
         output.appendChild(u.node(`<h3 style="color:green";>${response.data[i].s_name}</h3>`));
+        // output.appendChild(u.node('<h3 style="color:green";>' + response.data[i].s_name + '</h3>'));
       }
     })
     .catch(function(response){
@@ -99,7 +100,7 @@
     .catch(function(response){
       console.log('error response');
     });
-  })
+  });
 
   /* 
   post로 ajax 시도시 데이터를 같이 보내고 성공시 then에서 처리한다. 백틱 `을 사용하면 'text' + value + 'text' 이러한 문법을 위와 같이 좀 더 편하게 사용이 가능하다.

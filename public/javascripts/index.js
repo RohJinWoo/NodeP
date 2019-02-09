@@ -1,7 +1,7 @@
 
 var login = function(){
-  let uno = u.qu('#u-no')
-  let upw = u.qu('#u-pw')
+  let uno = u.qu('#u_no')
+  let upw = u.qu('#u_pw')
 
   /* 유효성 검사 추가 */
 

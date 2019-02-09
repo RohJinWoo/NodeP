@@ -56,4 +56,18 @@ router.post('/selectOne', (req, res) => {
   .catch(error => res.status(400).send(error));
 })
 
+router.get('/passport', sampleController.middleware, (req, res) => {
+  // console.log(req.body.s_name)
+  // sampleController.select(req, res, {
+  //   type: null,
+  //   data: {where: {s_name: req.body.s_name}}
+  // })
+  // .then(()=>{
+  //   res.send(req.sql);
+  // })
+  // .catch(error => res.status(400).send(error));
+  res.send('success');
+});
+
+
 module.exports = router;

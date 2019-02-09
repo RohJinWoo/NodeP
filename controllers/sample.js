@@ -62,5 +62,19 @@ module.exports = {
         req.sql = result;
       })
     }
-  }
+  },
+
+  middleware(req, res, next) {
+    console.log('middleware check');
+    console.log(req);
+    next();
+    // return Sample
+    // .create({
+    //   s_name: req.body.name,
+    // })
+    // .then(result => {
+    //   console.log('sample insert'); next();
+    // })
+    // .catch(error => res.status(400).send(error));
+  },
 };
