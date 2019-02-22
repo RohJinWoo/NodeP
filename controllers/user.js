@@ -31,7 +31,7 @@ module.exports = {
     .catch(error => res.status(400).send(error));
   },
 
-  logout(req, res, next){
+  logout(req, res){
     if(req.session.userid !== undefined){
       console.log('로그인 세션 존재');
       console.log('logout');
@@ -41,5 +41,15 @@ module.exports = {
       console.log('세션에 id값 존재하지 않음');
     }
     res.redirect('/');
+  },
+
+  login_access(req, res, next){
+    if(req.session.userid !== undefined){
+      console.log('로그인 세션 존재');
+      res.redirect('/calendar');
+    }else{
+      console.log('로그인 세션 존재하지 않음');
+    }
+    next();
   }
 };

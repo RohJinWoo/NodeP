@@ -19,13 +19,27 @@ router.get('/', function(req, res, next) {
 // });
 
 router.post('/login', userController.login, function(req, res, next) {
-  console.log('login')
+  console.log('login');
   let sess = req.session;
   sess.userid = req.body['u_no'];
   sess.userpw = req.body['u_pw'];
   res.redirect('calendar')
   // res.render('calendar', { title: 'Express' });
 });
+
+// get접근 처리 필요(※로그인 후 url입력 접근 말고 페이지 뒤로가기 후 회원가입 및 id/pw 찾기는 막은 상태)
+router.post('/sign_up', userController.login_access, function(rep, res, next){
+  console.log('sign_up');
+  res.render('sign_up',{title:'회원가입'});
+});
+
+// get접근 처리 필요(※로그인 후 url입력 접근 말고 페이지 뒤로가기 후 회원가입 및 id/pw 찾기는 막은 상태)
+router.post('/find_user', userController.login_access, function(rep, res, next){
+  console.log('find_user');
+  res.render('find_user',{title:'ID/PW 찾기'});
+});
+
+
 /* DB API */
 const companyController = require('../controllers').company;
 
