@@ -74,39 +74,41 @@ router.get('/email', (req, res) => {
   res.render('sample/email');
 })
 
-/* https://victorydntmd.tistory.com/113 */
-router.post('/emailpost', (req, res) => {
-  let email = req.body.email;
+// /* https://victorydntmd.tistory.com/113 */
+// router.post('/emailpost', (req, res) => {
+//   let email = req.body.email;
 
-  let transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user:'보낼놈',
-      pass:'보낼놈 비밀번호'
-    }
-  });
-  let token = 'qwer'
-  let mailOptions = {
-    from: '보낼 놈',
-    to: email,
-    subject: 'test mail node.js',
-    html: '<h1>메일 인증</h1>' + email + '<a href="http://localhost:3000/sample/emailauth/?email=' + email + '&token=' + token + '">인증하기</a>'
-  };
+//   let transporter = nodemailer.createTransport({
+//     service: 'gmail',
+//     auth: {
+//       user:'보낸놈',
+//       pass:'비번'
+//     }
+//   });
+//   console.log('email');
+//   console.log(email);
+//   let token = 'qwer'
+//   let mailOptions = {
+//     from: '보낸놈',
+//     to: email,
+//     subject: 'test mail node.js',
+//     html: '<h1>메일 인증</h1>' + email + '<a href="http://localhost:3000/sample/emailauth/?email=' + email + '&token=' + token + '">인증하기</a>'
+//   };
 
-  transporter.sendMail(mailOptions, function(err, info){
-    if(err){console.log(err);}
-    else{console.log('email sent: ' + info.response);};
-  });
+//   transporter.sendMail(mailOptions, function(err, info){
+//     if(err){console.log(err);}
+//     else{console.log('email sent: ' + info.response);};
+//   });
 
-  res.send(req.body.email);
-})
+//   res.send(req.body.email);
+// })
 
-router.get('/emailauth', (req, res) => {
-  // req.query.email
-  if(req.query.token == 'qwer'){
-    res.send('인증');
-  }
-  res.send('미인증');
-})
+// router.get('/emailauth', (req, res) => {
+//   // req.query.email
+//   if(req.query.token == 'qwer'){
+//     res.send('인증');
+//   }
+//   res.send('미인증');
+// })
 
 module.exports = router;

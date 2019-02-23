@@ -20,16 +20,18 @@
       <div class="input-group mb-4 offset-1 col-10">
         <input type="email" class="form-control" name="u_email" id="u_email" placeholder="이메일">
         <span class = "input-group-btn">
-          <button type="button" onclick="" class="bnt btn-primary btn-sm btn-span btn-block">이메일 인증</button>
+          <button type="button" onclick="send_email()" name="u_email_btn" class="bnt btn-primary btn-sm btn-span btn-block">이메일 인증</button>
         </span>
       </div>
       <div class = "btn-one offset-1 mb-4 col-10">
-        <button type="button" onclick="" class="btn btn-primary btn-lg btn-block">회원가입</button>
+        <button type="button" onclick="sign_up()" class="btn btn-primary btn-lg btn-block">회원가입</button>
       </div>
     </form>
   </body>
+  <script src="js/axios.min.js"></script>
   <script src="javascripts/util.js"></script>
-  <script src="javascripts/index.js"></script>
+  <script src="javascripts/email.js"></script>
+  <script src="javascripts/sign_up.js"></script>
   <script>
   </script>
 </html>

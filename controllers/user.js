@@ -49,7 +49,34 @@ module.exports = {
       res.redirect('/calendar');
     }else{
       console.log('로그인 세션 존재하지 않음');
+      next();
     }
-    next();
+  },
+
+  email_auth(req, res, next){
+    if(req.session.email_auth !== undefined){
+      console.log('이메일 인증 완료된 상태');
+      req.session.destroy();
+      res.clearCookie('sid');
+      next();
+    }else{
+      console.log('이메일 인증 필요');
+      res.redirect('/');
+    }
+  },
+
+  create(req, res, next){
+    console.log('create user');
+    return User
+    .create({
+      u_name : req.body.u_name,
+      u_no : req.body.u_no,
+      u_pw : req.body.u_pw,
+      u_email : req.body.u_email
+    })
+    .then(result => {
+      console.log('sample insert'); next();
+    })
+    .catch(error => res.status(400).send(error));
   }
 };
