@@ -26,5 +26,25 @@ const u = {
     while (child.hasChildNodes()) {
       child.removeChild(child.firstChild);
     }
+  },
+  validation: (str, type,) => {
+    let regexp;
+    switch (type) {
+      case 'number':
+        regexp = /^[0-9]/g;
+        return regexp.test(str);
+      case 'engkor':
+        regexp = /^[a-zA-Zㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+        return regexp.test(str);
+      case 'password':
+        regexp = /^(?=.*?[a-zA-Z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,16}$/;
+        //하나이상의 대소문자 영어, 하나 이상의 숫자, 하나 이상의 특수문자, 최소 8자 최대 16자
+        return regexp.test(str);
+      case 'email':
+        regexp = /\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+        return regexp.test(str);
+      default:
+        break;
+    }
   }
 }

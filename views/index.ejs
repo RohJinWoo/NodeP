@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title><%= obj.title !== undefined ? obj.title : '' %></title>
     <link rel='stylesheet' href="css/bootstrap.css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="js/bootstrap.js"></script>
-    
+    <% if (obj) { %> <script> var test = <%- JSON.stringify(obj) %>; console.log(test);</script> <% } %>
+
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1><%= obj.message !== undefined ? obj.message : '' %></h1>
+    <p>Welcome to <%= obj.title !== undefined ? obj.title : '' %></p>
     <form class="form-box" id="form">
       <h1 class="form-title">로그인</h1>
       <div class="input-group mb-4 offset-1 col-10">

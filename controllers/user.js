@@ -21,7 +21,7 @@ module.exports = {
         }
       } else {
         console.log('학번 없음');
-        res.send('학번 없음');
+        res.render('', {obj:{message: '학번없음'}});
       }
       
       // User.findOne({
