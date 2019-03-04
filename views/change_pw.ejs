@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= obj !== undefined ? obj.title : '' %></title>
+    <link rel='stylesheet' href="../css/bootstrap.css" />
+    <link rel='stylesheet' href='../stylesheets/style.css' />
+    <script> var user = <%- JSON.stringify(obj.user) %>;</script>
+  </head>
+  <body>
+      <form class="form-box" id="form">
+          <h1 class="form-title"><%= obj !== undefined ? obj.title : '' %></h1>
+          <div class="input-group mb-4 offset-1 col-10">
+            <input type="password" class="form-control" name="u_pw" id="u_pw" placeholder="신규 비밀번호">
+          </div>
+          <div class="input-group mb-4 offset-1 col-10">
+            <input type="password" class="form-control" name="u_pw_check" id="u_pw_check" placeholder="신규 비밀번호 확인">
+          </div>
+          <div class = "btn-one offset-1 mb-4 col-10">
+            <button type="button" onclick="change_pw()" class="btn btn-primary btn-lg btn-block">PW 변경하기</button>
+          </div>
+        </form>
+  </body>
+  <script src="../javascripts/util.js"></script>
+  <script src="../javascripts/users/change_pw.js"></script>
+  <script>
+  </script>
+</html>

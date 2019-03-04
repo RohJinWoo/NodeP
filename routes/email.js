@@ -16,7 +16,22 @@ router.post('/emailpost', (req, res) => {
     });
     console.log('email');
     console.log(email);
-    let token = 'qwer'
+
+    let token;
+    switch(req.body.req){
+      case 'sign_up':
+        token = 'qwer';
+        break;
+      case 'find_no':
+        token = 'qwert';
+        break;
+      case 'find_pw':
+        token = 'qwerty';
+        break;
+      default:
+        break;
+    };
+
     let mailOptions = {
       from: 'syncjw19@gmail.com',
       to: email,
@@ -35,12 +50,23 @@ router.post('/emailpost', (req, res) => {
   // email 인증(성공시 session값 생성, 실패시 nothing)
   router.get('/emailauth', (req, res) => {
     // req.query.email
-    if(req.query.token == 'qwer'){
-        let sess = req.session;
+    let sess = req.session;
+
+    switch(req.query.token){
+      case 'qwer':
         sess.email_auth = "qwer";
-        res.send('인증 완료');
+        break;
+      case 'qwert':
+        sess.email_auth = "qwert";
+        break;
+      case 'qwerty':
+        sess.email_auth = "qwerty";
+        break;
+      default:
+        res.send('미인증');
     }
-    res.send('미인증');
+    console.log(sess.email_auth);
+    res.send('인증 완료');
   })
   
   module.exports = router;

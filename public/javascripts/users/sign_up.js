@@ -16,7 +16,7 @@ var sign_up = function(){
 
     if(test){
       let form = u.qu('#form')
-      u.form(form,'./sign_up/auth','post')
+      u.form(form,'./users/auth','post')
     } else {
       alert('다 입력')
     }

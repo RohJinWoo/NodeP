@@ -20,9 +20,14 @@ var sign_up = function(){
   u.form(form, './sign_up', 'post')
 }
 
-// 아이디 및 비밀번호 찾기
-var find_user = function(){
-  u.form(form, './find_user', 'post')
+// 학번 찾기
+var find_no = function(){
+  u.form(form, './find_no', 'post')
+}
+
+// pw 찾기
+var find_pw = function(){
+  u.form(form, './find_pw', 'post')
 }
 
 // function form(form, path, method){

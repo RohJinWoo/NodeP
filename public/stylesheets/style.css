@@ -29,7 +29,7 @@ a {
 .btn-two{
   text-align: center;
 }
-.btn-two button:nth-child(1){
+.btn-two div:nth-child(1){
   margin-right: 20px;
 }
 

@@ -10,8 +10,10 @@ var router = express.Router();
 const userController = require('../controllers').user;
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { obj:{title:'Express'} });
+router.get('/', (req, res) => {
+  let obj = { title : 'Express' };
+  req.query.u_no !== undefined ? (obj.u_no = req.query.u_no) : null;
+  res.render('index', { obj });
 });
 
 // router.get('/login', function(req, res, next) {
@@ -34,9 +36,15 @@ router.post('/sign_up', userController.login_access, function(rep, res, next){
 });
 
 // get접근 처리 필요(※로그인 후 url입력 접근 말고 페이지 뒤로가기 후 회원가입 및 id/pw 찾기는 막은 상태)
-router.post('/find_user', userController.login_access, function(rep, res, next){
-  console.log('find_user');
-  res.render('find_user',{obj:{title:'ID/PW찾기'}});
+router.post('/find_no', userController.login_access, function(rep, res, next){
+  console.log('find_no');
+  res.render('find_no',{obj:{title:'학번 찾기'}});
+});
+
+// get접근 처리 필요(※로그인 후 url입력 접근 말고 페이지 뒤로가기 후 회원가입 및 id/pw 찾기는 막은 상태)
+router.post('/find_pw', userController.login_access, function(rep, res, next){
+  console.log('find_pw');
+  res.render('find_pw',{obj:{title:'비밀번호 찾기'}});
 });
 
 

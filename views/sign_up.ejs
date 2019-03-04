@@ -7,7 +7,7 @@
   </head>
   <body>
     <form class="form-box" id="form">
-      <h1 class="form-title">회원 가입</h1>
+      <h1 class="form-title"><%= obj !== undefined ? obj.title : '' %></h1>
       <div class="input-group mb-4 offset-1 col-10">
         <input type="text" class="form-control" name="u_no" id="u_no" placeholder="학번">
       </div>
@@ -20,7 +20,7 @@
       <div class="input-group mb-4 offset-1 col-10">
         <input type="email" class="form-control" name="u_email" id="u_email" placeholder="이메일">
         <span class = "input-group-btn">
-          <button type="button" onclick="send_email()" name="u_email_btn" class="bnt btn-primary btn-sm btn-span btn-block">이메일 인증</button>
+          <button type="button" onclick="send_email('sign_up')" name="u_email_btn" class="bnt btn-primary btn-sm btn-span btn-block">이메일 인증</button>
         </span>
       </div>
       <div class = "btn-one offset-1 mb-4 col-10">
@@ -31,7 +31,7 @@
   <script src="js/axios.min.js"></script>
   <script src="javascripts/util.js"></script>
   <script src="javascripts/email.js"></script>
-  <script src="javascripts/sign_up.js"></script>
+  <script src="javascripts/users/sign_up.js"></script>
   <script>
   </script>
 </html>

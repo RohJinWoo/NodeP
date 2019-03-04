@@ -1,33 +1,34 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title><%= obj !== undefined ? obj.title : '' %></title>
+    <link rel='stylesheet' href="css/bootstrap.css" />
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
       <form class="form-box" id="form">
-          <h1 class="form-title">ID / PW</h1>
-          <div class="input-group mb-4 offset-1 col-10">
-            <input type="text" class="form-control" name="u_no" id="u_no" placeholder="학번">
-          </div>
+          <h1 class="form-title"><%= obj !== undefined ? obj.title : '' %></h1>
           <div class="input-group mb-4 offset-1 col-10">
             <input type="text" class="form-control" name="u_name" id="u_name" placeholder="이름">
           </div>
           <div class="input-group mb-4 offset-1 col-10">
-            <input type="password" class="form-control" name="u_pw" id="u_pw" placeholder="비밀번호">
+            <input type="text" class="form-control" name="u_no" id="u_no" placeholder="학번">
           </div>
           <div class="input-group mb-4 offset-1 col-10">
             <input type="email" class="form-control" name="u_email" id="u_email" placeholder="이메일">
             <span class = "input-group-btn">
-              <button type="button" onclick="" name="u_email_btn" class="bnt btn-primary btn-sm btn-span btn-block">이메일 인증</button>
+              <button type="button" onclick="send_email('find_pw')" name="u_email_btn" class="bnt btn-primary btn-sm btn-span btn-block">이메일 인증</button>
             </span>
           </div>
           <div class = "btn-one offset-1 mb-4 col-10">
-            <button type="button" onclick="" class="btn btn-primary btn-lg btn-block">회원가입</button>
+            <button type="button" onclick="find_pw()" class="btn btn-primary btn-lg btn-block">PW 찾기</button>
           </div>
         </form>
   </body>
+  <script src="js/axios.min.js"></script>
   <script src="javascripts/util.js"></script>
+  <script src="javascripts/email.js"></script>
+  <script src="javascripts/users/find_pw.js"></script>
   <script>
   </script>
 </html>

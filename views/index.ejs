@@ -14,7 +14,8 @@
     <form class="form-box" id="form">
       <h1 class="form-title">로그인</h1>
       <div class="input-group mb-4 offset-1 col-10">
-        <input type="text" class="form-control" id="u_no" name="u_no" placeholder="학번" aria-label="Username" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" id="u_no" name="u_no" placeholder="학번" aria-label="Username" aria-describedby="basic-addon1"
+        value=<%= obj.u_no !== undefined ? obj.u_no : '' %>>
       </div>
       <div class="input-group mb-4 offset-1 col-10">
         <input type="password" class="form-control" id="u_pw" name="u_pw" placeholder="비밀번호" aria-label="Password" aria-describedby="basic-addon1">
@@ -24,8 +25,11 @@
       </div>
       
       <div class="btn-two offset-1 mb-4 col-10">
-        <button type="button" onclick="sign_up()" class="btn btn-primary col-5">회원가입</button>
-        <button type="button" onclick="find_user()" class="btn btn-primary col-5 ">아이디/패스워드 찾기</button>
+        <button type="button" onclick="sign_up()" class="btn btn-primary col-3">회원가입</button>
+        <div class="btn-group col-7" role="group">
+          <button type="button" onclick="find_no()" class="btn btn-primary">학번 찾기</button>
+          <button type="button" onclick="find_pw()" class="btn btn-primary">패스워드 찾기</button>
+        </div>
       </div>
       
     </form>
