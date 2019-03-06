@@ -12,8 +12,8 @@ const userController = require('../controllers').user;
 /* GET home page. */
 router.get('/', (req, res) => {
   let obj = { title : 'Express' };
-  req.query.u_no !== undefined ? (obj.u_no = req.query.u_no) : null;
-  res.render('index', { obj });
+  obj.u_no = req.session.u_no !== undefined ? req.session.u_no : undefined;
+  res.render('index', { obj : obj });
 });
 
 // router.get('/login', function(req, res, next) {
@@ -21,29 +21,35 @@ router.get('/', (req, res) => {
 // });
 
 router.post('/login', userController.login, function(req, res, next) {
-  console.log('login');
   let sess = req.session;
+  console.log('login');
   sess.userid = req.body['u_no'];
   sess.userpw = req.body['u_pw'];
   res.redirect('calendar')
   // res.render('calendar', { title: 'Express' });
 });
 
-// get접근 처리 필요(※로그인 후 url입력 접근 말고 페이지 뒤로가기 후 회원가입 및 id/pw 찾기는 막은 상태)
-router.post('/sign_up', userController.login_access, function(rep, res, next){
-  console.log('sign_up');
+router.get('/sign_up', userController.login_access, function(req, res, next){
+  let sess = req.session;
+  sess.email_auth !== undefined ? sess.email_auth.req = "sign_up" : sess.email_auth = {req : "sign_up"};
+  // sess.email_auth = {req : 'sign_up'};
+  console.log(sess.email_auth);
   res.render('sign_up',{obj:{title:'회원가입'}});
 });
 
-// get접근 처리 필요(※로그인 후 url입력 접근 말고 페이지 뒤로가기 후 회원가입 및 id/pw 찾기는 막은 상태)
-router.post('/find_no', userController.login_access, function(rep, res, next){
-  console.log('find_no');
+router.get('/find_no', userController.login_access, function(req, res, next){
+  let sess = req.session;
+  sess.email_auth !== undefined ? sess.email_auth.req = "find_no" : sess.email_auth = {req : "find_no"};
+  // sess.email_auth = {req : 'find_no'};
+  console.log(sess.email_auth);
   res.render('find_no',{obj:{title:'학번 찾기'}});
 });
 
-// get접근 처리 필요(※로그인 후 url입력 접근 말고 페이지 뒤로가기 후 회원가입 및 id/pw 찾기는 막은 상태)
-router.post('/find_pw', userController.login_access, function(rep, res, next){
-  console.log('find_pw');
+router.get('/find_pw', userController.login_access, function(req, res, next){
+  let sess = req.session;
+  sess.email_auth !== undefined ? sess.email_auth.req = "find_pw" : sess.email_auth = {req : "find_pw"};
+  // sess.email_auth = {req : 'find_pw'};
+  console.log(sess.email_auth);
   res.render('find_pw',{obj:{title:'비밀번호 찾기'}});
 });
 

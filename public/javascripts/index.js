@@ -11,23 +11,17 @@ var login = function(){
 
 // 회원가입
 var sign_up = function(){
-  let u_no = u.qu('#u_no')
-  let u_name = u.qu('#u_name')
-  let u_pw = u.qu('#u_pw')
-  let u_email = u.qu('#u_email')
-
-  let form = u.qu('#form')
-  u.form(form, './sign_up', 'post')
+  u.link("./sign_up")
 }
 
 // 학번 찾기
 var find_no = function(){
-  u.form(form, './find_no', 'post')
+  u.link("./find_no")
 }
 
 // pw 찾기
 var find_pw = function(){
-  u.form(form, './find_pw', 'post')
+  u.link("./find_pw")
 }
 
 // function form(form, path, method){

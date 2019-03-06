@@ -35,8 +35,7 @@ module.exports = {
     if(req.session.userid !== undefined){
       console.log('로그인 세션 존재');
       console.log('logout');
-      req.session.destroy();
-      res.clearCookie('sid');
+      req.session.userid = undefined;
     } else {
       console.log('세션에 id값 존재하지 않음');
     }
@@ -53,18 +52,38 @@ module.exports = {
     }
   },
 
-  // sign_up
-  sign_auth(req, res, next){
-    if(req.session.email_auth === "qwer"){
+  email_auth(req, res, next){
+    console.log(req.session.email_auth)
+    if(req.session.email_auth.auth === "qwer" && req.session.email_auth.req === 'sign_up'){
       console.log('이메일 인증 완료된 상태 sign_auth');
-      req.session.destroy();
-      res.clearCookie('sid');
+      req.session.email_auth = undefined;
       next();
-    }else{
+    }else if(req.session.email_auth.auth === "qwert" && req.session.email_auth.req === 'find_no'){
+      console.log('이메일 인증 완료된 상태 find_no');
+      req.session.email_auth = undefined;
+      next();
+    }else if(req.session.email_auth.auth === "qwerty" && req.session.email_auth.req === 'find_pw'){
+      console.log('이메일 인증 완료된 상태 find_pw');
+      req.session.email_auth = undefined;
+      next();
+    }
+    else{
       console.log('이메일 인증 필요');
       res.redirect('/');
     }
   },
+
+  // sign_up
+  // sign_auth(req, res, next){
+  //   if(req.session.email_auth === "qwer"){
+  //     console.log('이메일 인증 완료된 상태 sign_auth');
+  //     req.session.email_auth = undefined;
+  //     next();
+  //   }else{
+  //     console.log('이메일 인증 필요');
+  //     res.redirect('/');
+  //   }
+  // },
 
   create(req, res, next){
     console.log('create user');
@@ -81,48 +100,49 @@ module.exports = {
     .catch(error => res.status(400).send(error));
   },
 
-  find_no(req, res, next){
-    if(req.session.email_auth === "qwert"){
-      console.log('이메일 인증 완료된 상태 find_no');
-      req.session.destroy();
-      res.clearCookie('sid');
-      next();
-    }else{
-      console.log('이메일 인증 필요');
-      res.redirect('/');
-    }
-  },
+  // find_no(req, res, next){
+  //   if(req.session.email_auth === "qwert"){
+  //     console.log('이메일 인증 완료된 상태 find_no');
+  //     req.session.email_auth = undefined;
+  //     next();
+  //   }else{
+  //     console.log('이메일 인증 필요');
+  //     res.redirect('/');
+  //   }
+  // },
 
   select(req, res, config){
     if(config.type === 'u_no'){
       return User.findOne(config.data)
-      .then(result => {
-        result !== undefined ? res.redirect('/?u_no='+result.u_no) : res.send('이름, 이메일을 확인 후 다시 입력해주세요.');
+      .catch(error => {
+        console.log('err',error);
+        res.status(400).send(error)
       });
     }else{
       return User.findOne(config.data)
-      .then(result => {
-        result !== undefined ? res.render('change_pw',{ obj : { title : '비밀번호 재설정', user : req.body } } ) : res.send('학번, 이름, 이메일을 확인 후 다시 입력해주세요.');
+      .catch(error => {
+        console.log('err',error);
+        res.status(400).send(error)
       });
     }
   },
 
-  find_pw(req, res, next){
-    if(req.session.email_auth === "qwerty"){
-      console.log('이메일 인증 완료된 상태 find_pw');
-      req.session.destroy();
-      res.clearCookie('sid');
-      next();
-    }else{
-      console.log('이메일 인증 필요');
-      res.redirect('/');
-    }
-  },
+  // find_pw(req, res, next){
+  //   if(req.session.email_auth === "qwerty"){
+  //     console.log('이메일 인증 완료된 상태 find_pw');
+  //     req.session.email_auth = undefined;
+  //     next();
+  //   }else{
+  //     console.log('이메일 인증 필요');
+  //     res.redirect('/');
+  //   }
+  // },
 
   update(req, res, pw, config){
     return User.update(pw, config)
-    .then(result => {
-      res.redirect('/?u_no=' + req.body.u_no);
-    })
+    .catch(error => {
+      console.log('err',error);
+      res.status(400).send(error)
+    });
   }
 };

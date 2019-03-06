@@ -5,7 +5,7 @@ var router = express.Router();
 const userController = require('../controllers').user;
 
 
-router.post('/auth', userController.sign_auth, userController.create, function(req, res, next){
+router.post('/auth', userController.email_auth, userController.create, function(req, res, next){
     console.log('회원가입 완료');
     res.redirect('/')
 });
@@ -15,25 +15,50 @@ router.post('/sign', userController.create, function(req, res, next){
     res.redirect('/')
 });
 
-router.post('/find_no', userController.find_no, (req, res) => {
+router.post('/find_no', userController.email_auth, (req, res) => {
     console.log(req.body.u_name);
     userController.select(req, res, {
     type: 'u_no',
     data: {where: {u_name: req.body.u_name, u_email : req.body.u_email}}
   })
-  .then(()=>{
-    // res.send("찾으시는 학번은 <b>" + req.sql_u_no + "</b> 입니다.");
+  .then(result =>{
+    console.log("?",result)
+    if(result !== null){
+      let sess = req.session
+      sess.u_no = result.u_no;
+      res.redirect('/');
+    }
+    else{
+      res.send('학번, 이름, 이메일을 확인 후 다시 입력해주세요.');
+    }
   })
-  .catch(error => res.status(400).send(error));
+  .catch(error => {
+    console.log('err',error);
+    res.status(400).send(error)
+  });
 });
 
-router.post('/find_pw', userController.find_pw, (req, res) => {
+router.post('/find_pw', userController.email_auth, (req, res) => {
     console.log(req.body.u_name);
     userController.select(req, res, {
     type: null,
     data: {where: {u_name: req.body.u_name, u_no : req.body.u_no, u_email : req.body.u_email}}
   })
-  .catch(error => res.status(400).send(error));
+  .then(result => {
+    if(result !== null){
+      let sess = req.session
+      sess.u_no = req.body.u_no;
+      sess.u_name = req.body.u_name;
+      sess.u_email = req.body.u_email;
+      res.render('change_pw', { obj : { title : '비밀번호 재설정' } });
+    }else{
+      res.send('학번, 이름, 이메일을 확인 후 다시 입력해주세요.');
+    }
+  })
+  .catch(error => {
+    console.log('err',error);
+    res.status(400).send(error)
+  });
 });
 
 router.post('/change_pw', (req, res) => {
@@ -41,9 +66,21 @@ router.post('/change_pw', (req, res) => {
       u_pw: req.body.u_pw
     }
     , {
-    where: {u_name: req.body.u_name, u_no : req.body.u_no, u_email : req.body.u_email}
+    where: {u_name: req.session.u_name, u_no : req.session.u_no, u_email : req.session.u_email}
   })
-  .catch(error => res.status(400).send(error));
+  .then(result => {
+    if(result !== null){
+      req.session.u_name = undefined;
+      req.session.u_email = undefined;
+      res.redirect('/');
+    }else{
+      res.send('에러발생');
+    }
+  })
+  .catch(error => {
+    console.log('err',error);
+    res.status(400).send(error)
+  });
 });
 
 module.exports = router;

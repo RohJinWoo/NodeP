@@ -50,22 +50,22 @@ router.post('/emailpost', (req, res) => {
   // email 인증(성공시 session값 생성, 실패시 nothing)
   router.get('/emailauth', (req, res) => {
     // req.query.email
-    let sess = req.session;
+    let email_auth = req.session.email_auth;
 
     switch(req.query.token){
       case 'qwer':
-        sess.email_auth = "qwer";
+        email_auth !== undefined ? email_auth.auth = "qwer" : email_auth = {auth : "qwer"};
         break;
       case 'qwert':
-        sess.email_auth = "qwert";
+        email_auth !== undefined ? email_auth.auth = "qwert" : email_auth = {auth : "qwert"};
         break;
       case 'qwerty':
-        sess.email_auth = "qwerty";
+        email_auth !== undefined ? email_auth.auth = "qwerty" : email_auth = {auth : "qwerty"};
         break;
       default:
         res.send('미인증');
     }
-    console.log(sess.email_auth);
+    console.log(email_auth);
     res.send('인증 완료');
   })
   

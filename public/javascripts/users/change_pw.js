@@ -10,9 +10,6 @@ var change_pw = function(){
     
         if(test){
             let form = u.qu('#form')
-            for(i in user){
-                form.appendChild(u.node('<input type="hidden" name="'+i+'" id="'+i+'" value="'+user[i]+'">'));
-            }
             u.form(form,'./change_pw','post')
         } else {
             alert('다시 입력')
