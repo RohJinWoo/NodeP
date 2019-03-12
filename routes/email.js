@@ -51,16 +51,17 @@ router.post('/emailpost', (req, res) => {
   router.get('/emailauth', (req, res) => {
     // req.query.email
     let email_auth = req.session.email_auth;
+    email_auth !== undefined ? email_auth.email = req.query.email : email_auth = {email : req.query.email};
 
     switch(req.query.token){
       case 'qwer':
-        email_auth !== undefined ? email_auth.auth = "qwer" : email_auth = {auth : "qwer"};
+        email_auth.auth = "qwer";
         break;
       case 'qwert':
-        email_auth !== undefined ? email_auth.auth = "qwert" : email_auth = {auth : "qwert"};
+        email_auth.auth = "qwert";
         break;
       case 'qwerty':
-        email_auth !== undefined ? email_auth.auth = "qwerty" : email_auth = {auth : "qwerty"};
+        email_auth.auth = "qwerty";
         break;
       default:
         res.send('미인증');
