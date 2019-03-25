@@ -19,8 +19,8 @@ router.get('/', function(req, res, next) {
 
   페이지네이션을 위한 param들에 따라 sql을 다르게 조회할수 있는 로직 필요.
   */
- res.render('board', { u_name, isStudent: boolean, today: obj1, b_no, b_title, 
-  sub_name, b_date, b_view });
+  res.render('board', { obj : { title: 'Express' } });
+  // res.render('board', { u_name, isStudent: boolean, today: obj1, b_no, b_title, sub_name, b_date, b_view });
 });
 
 // router.get('/login', function(req, res, next) {
